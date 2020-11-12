@@ -97,28 +97,74 @@ class App extends Component {
     this.state = {
       items: data,
       sort: "",
-      color:""
+      color:"",
+      brand:""
     }
   }
 
-  sortProducts(event){
+  sortProducts = (event) => {
 
-    console.log(event.target.value);
+    this.setState((state) => (
+      {
+        sort: event.target.value,
+        items: this.state.items.slice().sort((a,b) => (
+          event.target.value === "highest"?
+          ((a.price < b.price)? 1:-1):
+          event.target.value === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a._id > b._id ? 1:-1
+        ))
+      }
+    ))
 
   }
 
   filterProductsColor = (event) => {
-
     if(event.target.value === ""){
-      this.setState({color: event.target.value, items: data})
+      if(this.state.brand === ""){
+        this.setState({color: event.target.value, items: data})
+      }else{
+        this.setState({color: event.target.value, items: data.filter(item => item.brand === this.state.brand)})
+      }
     }else{
-      this.setState({
-        color: event.target.value,
-        items: data.filter(item => item.color === event.target.value)
-  
-      })
-    }
+      if(this.state.brand === ""){
+        this.setState({
+          color: event.target.value,
+          items: data.filter(item => item.color === event.target.value)
     
+        })
+      }else{
+        this.setState({
+          color: event.target.value,
+          items: data.filter(item => (item.color === event.target.value && item.brand === this.state.brand))
+    
+        })
+      }
+    } 
+  }
+
+  filterProductsBrand = (event) => {
+    if(event.target.value === ""){
+      if(this.state.color === ""){
+        this.setState({brand: event.target.value, items: data})
+      }else{
+        this.setState({brand: event.target.value, items: data.filter(item => item.color === this.state.color)})
+      }     
+    }else{
+      if(this.state.color === ""){
+        this.setState({
+          brand: event.target.value,
+          items: data.filter(item => item.brand === event.target.value)
+    
+        })
+      }else{
+        this.setState({
+          brand: event.target.value,
+          items: data.filter(item => (item.brand === event.target.value && item.color === this.state.color))
+    
+        })
+      }
+    }   
   }
 
   render() {
@@ -127,7 +173,9 @@ class App extends Component {
 <Filter
 sort={this.state.sort}
 color={this.state.color}
+brand={this.state.brand}
 filterProductsColor={this.filterProductsColor}
+filterProductsBrand={this.filterProductsBrand}
 sortProducts={this.sortProducts}
 />
       <DisplayList items={this.state.items}></DisplayList>

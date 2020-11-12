@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class DisplayList extends Component {
     createItem = item => {
         return (
-            <div style= {{ backgroundColor:"#aaf0d1", padding: 5, paddingLeft:10, margin:15, width: 250}}>
+            <div style= {{ backgroundColor:"#aaf0d1", padding: 5, paddingLeft:10, paddingRight:10, margin:15, width: 250}}>
                 <p>Name: {item.name}</p>
                 <p>Brand: {item.brand}</p>
                 <p>Color: {item.color}</p>
