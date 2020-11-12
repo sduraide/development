@@ -16,91 +16,122 @@ import adi1 from "./images/adi1.webp"
 import adi2 from "./images/adi2.jpeg"
 import adi3 from "./images/adi3.jpeg"
 import adi4 from "./images/adi4.webp"
+import Filter from "./Filter";
+
+const data = [{brand: "Zara",
+name: "Black Floral Print", 
+color: "Black",
+url: zara1,
+price: 15.99
+},
+{brand: "Zara",
+name: "Velvet Brown Top", 
+color: "Brown",
+url: zara2,
+price: 20.99
+},
+{brand: "Zara",
+name: "Velvet Top with Knot", 
+color: "Pink",
+url: zara3,
+price: 25.99
+},
+{brand: "Zara",
+name: "Frill Top", 
+color: "Black",
+url: zara4,
+price: 27.99
+},
+{brand: "H&M",
+name: "Cropped Top", 
+color: "Brown",
+url: hm2,
+price: 28.99
+},
+{brand: "H&M",
+name: "Cotton Poplin Top", 
+color: "Pink",
+url: hm3,
+price: 30.99
+},
+{brand: "H&M",
+name: "Ribbed Puff-Sleeved Top", 
+color: "Black",
+url: hm1,
+price: 32.99
+},
+{brand: "H&M",
+name: "Draped Top", 
+color: "Brown",
+url: hm4,
+price: 33.99
+},
+{brand: "Adika",
+name: "Ribbed Hot Pink", 
+color: "Pink",
+url: adi3,
+price: 35.99
+},
+{brand: "Adika",
+name: "Semi Crop Sweater", 
+color: "Black",
+url: adi1,
+price: 37.99
+},
+{brand: "Adika",
+name: "Sienna Ruffle", 
+color: "Brown",
+url: adi2,
+price: 38.99
+},
+{brand: "Adika",
+name: "Contrast Straps", 
+color: "Pink",
+url: adi4,
+price: 40.99
+}]
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      items: [
-        {brand: "Zara",
-        name: "Black Floral Print", 
-        color: "Black",
-        url: zara1,
-        price: 15.99
-        },
-        {brand: "Zara",
-        name: "Velvet Brown Top", 
-        color: "Brown",
-        url: zara2,
-        price: 20.99
-        },
-        {brand: "Zara",
-        name: "Velvet Top with Knot", 
-        color: "Pink",
-        url: zara3,
-        price: 25.99
-        },
-        {brand: "Zara",
-        name: "Frill Top", 
-        color: "Black",
-        url: zara4,
-        price: 27.99
-        },
-        {brand: "H&M",
-        name: "Cropped Top", 
-        color: "Brown",
-        url: hm2,
-        price: 28.99
-        },
-        {brand: "H&M",
-        name: "Cotton Poplin Top", 
-        color: "Pink",
-        url: hm3,
-        price: 30.99
-        },
-        {brand: "H&M",
-        name: "Ribbed Puff-Sleeved Top", 
-        color: "Black",
-        url: hm1,
-        price: 32.99
-        },
-        {brand: "H&M",
-        name: "Draped Top", 
-        color: "Brown",
-        url: hm4,
-        price: 33.99
-        },
-        {brand: "Adika",
-        name: "Ribbed Hot Pink", 
-        color: "Pink",
-        url: adi3,
-        price: 35.99
-        },
-        {brand: "Adika",
-        name: "Semi Crop Sweater", 
-        color: "Black",
-        url: adi1,
-        price: 37.99
-        },
-        {brand: "Adika",
-        name: "Sienna Ruffle", 
-        color: "Brown",
-        url: adi2,
-        price: 38.99
-        },
-        {brand: "Adika",
-        name: "Contrast Straps", 
-        color: "Pink",
-        url: adi4,
-        price: 40.99
-        },
-      ]
+      items: data,
+      sort: "",
+      color:""
     }
+  }
+
+  sortProducts(event){
+
+    console.log(event.target.value);
+
+  }
+
+  filterProductsColor = (event) => {
+
+    if(event.target.value === ""){
+      this.setState({color: event.target.value, items: data})
+    }else{
+      this.setState({
+        color: event.target.value,
+        items: data.filter(item => item.color === event.target.value)
+  
+      })
+    }
+    
   }
 
   render() {
     return (
+      <div>
+<Filter
+sort={this.state.sort}
+color={this.state.color}
+filterProductsColor={this.filterProductsColor}
+sortProducts={this.sortProducts}
+/>
       <DisplayList items={this.state.items}></DisplayList>
+      </div>
     );
   }
 }
