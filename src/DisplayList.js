@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import './App.css';
 
 class DisplayList extends Component {
     createItem = item => {
@@ -16,7 +17,7 @@ class DisplayList extends Component {
     render() {
         const dresses = this.props.items;
         const listItems = dresses.map(this.createItem);
-        return <div style={{display:"flex", flexDirection:"row"}}>{listItems}</div>;
+        return <div style={{display:"flex", flexDirection:"row", flexWrap: "wrap"}}>{listItems}</div>;
     }
 }
 
