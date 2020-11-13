@@ -17,9 +17,13 @@ class Cart extends Component {
     render(){
         const cartItems = this.props.cartItems
         const listItems = cartItems.map(this.createItem);
+        let totalItems = 0;
+        for(const item of cartItems){
+            totalItems += item.count
+        }
         return(
             <div style={{marginRight: 15, backgroundColor: "#c4dfe6"}}>
-                <p style={{border: "2px #66a5ad solid", textAlign: "center", padding:5, fontSize: 20, color: "#003b46", fontFamily:"sans-serif"}}>Shopping Cart</p>
+                <p style={{border: "2px #66a5ad solid", textAlign: "center", padding:5, fontSize: 20, color: "#003b46", fontFamily:"sans-serif"}}>Shopping Cart ({totalItems})</p>
                 <div className="cart" style={{display:"flex", flexDirection:"row", flexWrap: "wrap", justifyContent: "space-between", marginRight: 15, marginLeft: 15}}>
                 {listItems}
                 </div>
