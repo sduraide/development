@@ -139,22 +139,53 @@ class App extends Component {
   filterProductsColor = (event) => {
     if(event.target.value === ""){
       if(this.state.brand === ""){
-        this.setState({color: event.target.value, items: data})
+        const tempItems = data
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
+        this.setState({color: event.target.value, items: tempItems})
       }else{
-        this.setState({color: event.target.value, items: data.filter(item => item.brand === this.state.brand)})
+        const tempItems = data.filter(item => item.brand === this.state.brand)
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
+        this.setState({color: event.target.value, items: tempItems})
       }
     }else{
       if(this.state.brand === ""){
+        const tempItems = data.filter(item => item.color === event.target.value)
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
         this.setState({
           color: event.target.value,
-          items: data.filter(item => item.color === event.target.value)
+          items: tempItems
     
         })
       }else{
+        const tempItems = data.filter(item => (item.color === event.target.value && item.brand === this.state.brand))
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
         this.setState({
           color: event.target.value,
-          items: data.filter(item => (item.color === event.target.value && item.brand === this.state.brand))
-    
+          items: tempItems
         })
       }
     } 
@@ -163,7 +194,15 @@ class App extends Component {
   filterProductsBrand = (event) => {
     if(event.target.value === ""){
       if(this.state.color === ""){
-        this.setState({brand: event.target.value, items: data})
+        const tempItems = data
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
+        this.setState({brand: event.target.value, items: tempItems})
       }else{
         const tempItems = data.filter(item => item.color === this.state.color)
         tempItems.sort((a,b) => (
@@ -173,19 +212,35 @@ class App extends Component {
           ((a.price > b.price)? 1:-1):
           a.id > b.id ? 1:-1
         ))
-        this.setState({brand: event.target.value, items: data.filter(item => item.color === this.state.color)})
+        this.setState({brand: event.target.value, items: tempItems})
       }     
     }else{
       if(this.state.color === ""){
+        const tempItems = data.filter(item => item.brand === event.target.value)
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
         this.setState({
           brand: event.target.value,
-          items: data.filter(item => item.brand === event.target.value)
+          items: tempItems
     
         })
       }else{
+        const tempItems = data.filter(item => (item.brand === event.target.value && item.color === this.state.color))
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
         this.setState({
           brand: event.target.value,
-          items: data.filter(item => (item.brand === event.target.value && item.color === this.state.color))
+          items: tempItems
     
         })
       }
