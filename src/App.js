@@ -17,78 +17,91 @@ import adi2 from "./images/adi2.jpeg"
 import adi3 from "./images/adi3.jpeg"
 import adi4 from "./images/adi4.webp"
 import Filter from "./Filter";
+import Cart from "./Cart";
 
 const data = [{brand: "Zara",
 name: "Black Floral Print", 
 color: "Black",
 url: zara1,
-price: 15.99
+price: 15.99,
+id: 1
 },
 {brand: "Zara",
 name: "Velvet Brown Top", 
 color: "Brown",
 url: zara2,
-price: 20.99
+price: 20.99,
+id: 2
 },
 {brand: "Zara",
 name: "Velvet Top with Knot", 
 color: "Pink",
 url: zara3,
-price: 25.99
+price: 25.99,
+id: 3
 },
 {brand: "Zara",
 name: "Frill Top", 
 color: "Black",
 url: zara4,
-price: 27.99
+price: 27.99,
+id: 4
 },
 {brand: "H&M",
 name: "Cropped Top", 
 color: "Brown",
 url: hm2,
-price: 28.99
+price: 28.99,
+id: 5
 },
 {brand: "H&M",
 name: "Cotton Poplin Top", 
 color: "Pink",
 url: hm3,
-price: 30.99
+price: 30.99,
+id: 6
 },
 {brand: "H&M",
 name: "Ribbed Puff-Sleeved Top", 
 color: "Black",
 url: hm1,
-price: 32.99
+price: 32.99,
+id: 7
 },
 {brand: "H&M",
 name: "Draped Top", 
 color: "Brown",
 url: hm4,
-price: 33.99
+price: 33.99,
+id: 8
 },
 {brand: "Adika",
 name: "Ribbed Hot Pink", 
 color: "Pink",
 url: adi3,
-price: 35.99
+price: 35.99,
+id: 9
 },
 {brand: "Adika",
 name: "Semi Crop Sweater", 
 color: "Black",
 url: adi1,
-price: 37.99
+price: 37.99,
+id: 10
 },
 {brand: "Adika",
 name: "Sienna Ruffle", 
 color: "Brown",
 url: adi2,
-price: 38.99
+price: 38.99,
+id: 11
 },
 {brand: "Adika",
 name: "Contrast Straps", 
 color: "Pink",
 url: adi4,
-price: 40.99
+price: 40.99,
+id: 12
 }]
 
 class App extends Component {
@@ -98,11 +111,15 @@ class App extends Component {
       items: data,
       sort: "",
       color:"",
-      brand:""
+      brand:"",
+      cart: []
     }
   }
 
+  //modify this
   sortProducts = (event) => {
+
+    console.log(this.state.items.map(item => item.key))
 
     this.setState((state) => (
       {
@@ -112,7 +129,7 @@ class App extends Component {
           ((a.price < b.price)? 1:-1):
           event.target.value === "lowest"?
           ((a.price > b.price)? 1:-1):
-          a._id > b._id ? 1:-1
+          a.id > b.id ? 1:-1
         ))
       }
     ))
@@ -167,6 +184,26 @@ class App extends Component {
     }   
   }
 
+  addToCart = (product) => {
+    const cartItems = this.state.cart.slice();
+    let alreadyInCart = false
+    cartItems.forEach(item => {
+      if(item.id === product.id){
+        item.count++
+        alreadyInCart = true
+      }
+    })
+    if(!alreadyInCart){
+      cartItems.push({...product, count: 1})
+    }
+    this.setState({cart: cartItems})
+  }
+
+  removeFromCart = (product) => {
+    const cartItems = this.state.cart.slice();
+    this.setState({cart: cartItems.filter(item => item.id !== product.id)})
+  }
+
   render() {
     return (
       <div>
@@ -178,7 +215,14 @@ filterProductsColor={this.filterProductsColor}
 filterProductsBrand={this.filterProductsBrand}
 sortProducts={this.sortProducts}
 />
-      <DisplayList items={this.state.items}></DisplayList>
+<div style={{padding: 20}}>
+  <div style={{width:"70%", float:"left"}}>
+  <DisplayList addToCart={this.addToCart} items={this.state.items}></DisplayList>
+  </div>
+<div style={{width:"30%", float:"left"}}>
+<Cart removeFromCart={this.removeFromCart} cartItems={this.state.cart}></Cart>
+</div>
+</div>
       </div>
     );
   }

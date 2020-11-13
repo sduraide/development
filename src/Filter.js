@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 class Filter extends Component {
     render() {
         return (
-            <div className="filter" style={{display: "flex", padding:1, margin:5, justifyContent: "center", border: "3px dotted #aaf0d1"}}>
-                <div className="filter-sort" style={{margin:10}}>{" "}
+            <div className="filter" style={{display: "flex", padding:1, margin:15, justifyContent: "center", border: "3px dotted #c4dfe6"}}>
+                <div className="filter-sort" style={{margin:10, color: "white", fontFamily:"sans-serif"}}>{" "}
                 Sort item <select value={this.props.sort} onChange={this.props.sortProducts}>
                     <option value="lowest">Lowest to Highest</option>
                     <option value="highest">Highest to Lowest</option>
                     </select></div>
 
-                <div className="filter-color" style={{margin:10}}>Filter Items By Color 
+                <div className="filter-color" style={{margin:10, color: "white", fontFamily:"sans-serif"}}>Filter Items By Color {" "}
                 <select value={this.props.color} onChange={this.props.filterProductsColor}>
                     <option value="">All</option>
                     <option value="Black">Black</option>
@@ -19,7 +19,7 @@ class Filter extends Component {
                 </select>
                 </div>
 
-                <div className="filter-brand" style={{margin:10}}>Filter Items By Brand
+                <div className="filter-brand" style={{margin:10, color: "white", fontFamily:"sans-serif"}}>Filter Items By Brand {" "}
                 <select value={this.props.brand} onChange={this.props.filterProductsBrand}>
                     <option value="">All</option>
                     <option value="Zara">Zara</option>
