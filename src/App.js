@@ -165,6 +165,14 @@ class App extends Component {
       if(this.state.color === ""){
         this.setState({brand: event.target.value, items: data})
       }else{
+        const tempItems = data.filter(item => item.color === this.state.color)
+        tempItems.sort((a,b) => (
+          this.state.sort === "highest"?
+          ((a.price < b.price)? 1:-1):
+          this.state.sort === "lowest"?
+          ((a.price > b.price)? 1:-1):
+          a.id > b.id ? 1:-1
+        ))
         this.setState({brand: event.target.value, items: data.filter(item => item.color === this.state.color)})
       }     
     }else{
@@ -181,7 +189,7 @@ class App extends Component {
     
         })
       }
-    }   
+    }
   }
 
   addToCart = (product) => {

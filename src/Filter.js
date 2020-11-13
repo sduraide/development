@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Filter extends Component {
     render() {
         return (
-            <div className="filter" style={{display: "flex", padding:1, margin:15, justifyContent: "center", border: "3px dotted #c4dfe6"}}>
+            <div className="filter" style={{display: "flex", padding:1, margin:20, marginLeft:80, justifyContent: "center", border: "3px dotted #c4dfe6"}}>
                 <div className="filter-sort" style={{margin:10, color: "white", fontFamily:"sans-serif"}}>{" "}
                 Sort item <select value={this.props.sort} onChange={this.props.sortProducts}>
                     <option value="lowest">Lowest to Highest</option>
