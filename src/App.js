@@ -2,20 +2,20 @@ import React, {Component} from "react";
 import DisplayList from './DisplayList'
 import './App.css';
 
-import zara3 from "./images/zara3.jpg"
-import zara1 from "./images/zara1.webp"
-import zara2 from "./images/zara2.webp"
-import zara4 from "./images/zara4.webp"
+import zara3 from "./images/zara3.png"
+import zara1 from "./images/zara1.png"
+import zara2 from "./images/zara2.png"
+import zara4 from "./images/zara4.png"
 
-import hm1 from "./images/hm1.jpeg"
-import hm2 from "./images/hm2.jpeg"
-import hm3 from "./images/hm3.jpeg"
-import hm4 from "./images/hm4.jpeg"
+import hm1 from "./images/hm1.png"
+import hm2 from "./images/hm2.png"
+import hm3 from "./images/hm3.png"
+import hm4 from "./images/hm4.png"
 
-import adi1 from "./images/adi1.webp"
-import adi2 from "./images/adi2.jpeg"
-import adi3 from "./images/adi3.jpeg"
-import adi4 from "./images/adi4.webp"
+import adi1 from "./images/adi1.png"
+import adi2 from "./images/adi2.png"
+import adi3 from "./images/adi3.png"
+import adi4 from "./images/adi4.png"
 import Filter from "./Filter";
 import Cart from "./Cart";
 
@@ -207,7 +207,10 @@ class App extends Component {
   render() {
     return (
       <div>
-<Filter
+
+        <h1 style={{textAlign: "center", color: "white", fontFamily:"sans-serif"}}>CS1300 Top Shop</h1>
+        <div style={{ padding:20, width:"54%"}}>
+        <Filter
 sort={this.state.sort}
 color={this.state.color}
 brand={this.state.brand}
@@ -215,6 +218,7 @@ filterProductsColor={this.filterProductsColor}
 filterProductsBrand={this.filterProductsBrand}
 sortProducts={this.sortProducts}
 />
+        </div>
 <div style={{padding: 20}}>
   <div style={{width:"70%", float:"left"}}>
   <DisplayList addToCart={this.addToCart} items={this.state.items}></DisplayList>

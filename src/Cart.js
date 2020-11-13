@@ -19,18 +19,18 @@ class Cart extends Component {
         const listItems = cartItems.map(this.createItem);
         return(
             <div style={{marginRight: 15, backgroundColor: "#c4dfe6"}}>
-                <p style={{border: "2px #66a5ad solid", textAlign: "center", padding:5}}>Shopping Cart</p>
+                <p style={{border: "2px #66a5ad solid", textAlign: "center", padding:5, fontSize: 20, color: "#003b46", fontFamily:"sans-serif"}}>Shopping Cart</p>
                 <div className="cart" style={{display:"flex", flexDirection:"row", flexWrap: "wrap", justifyContent: "space-between", marginRight: 15, marginLeft: 15}}>
                 {listItems}
                 </div>
 
                 {cartItems.length !==0 && (
                     <div style={{display:"flex", justifyContent: "space-around", width: "100%", alignItems: "center", paddingBottom: 10}}>
-                        <div>
+                        <div style={{fontFamily:"sans-serif"}}>
                             Total: {" "}
                             {cartItems.reduce((a,c) => a + c.price * c.count, 0)}
                         </div>
-                        <button>Checkout</button>
+                        <button style={{backgroundColor:"white", color: "#003b46", border: "3px #66a5ad solid", padding: 5, justifyContent: "center", borderRadius: 10, marginLeft:5, marginRight:5, fontSize:15}}>Checkout</button>
                     </div>
                     
                 )}
