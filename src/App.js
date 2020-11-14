@@ -19,6 +19,7 @@ import adi4 from "./images/adi4.png"
 import Filter from "./Filter";
 import Cart from "./Cart";
 
+// list of product cards to be displayed on the homepage
 const data = [{brand: "Zara",
 name: "Black Floral Print", 
 color: "Black",
@@ -117,9 +118,9 @@ class App extends Component {
   }
 
  //sortProducts referenced: https://www.codegrepper.com/code-examples/typescript/sort+array+of+objects+in+react+js 
-  sortProducts = (event) => {
 
-    console.log(this.state.items.map(item => item.key))
+ //function to sort products by price. Takes in an event which tells the value user selected from dropdown.
+  sortProducts = (event) => {
 
     this.setState((state) => (
       {
@@ -129,6 +130,7 @@ class App extends Component {
           ((a.price < b.price)? 1:-1):
           event.target.value === "lowest"?
           ((a.price > b.price)? 1:-1):
+          //if option chosen is "Select" then sort by id of item
           a.id > b.id ? 1:-1
         ))
       }
@@ -136,9 +138,12 @@ class App extends Component {
 
   }
 
+  //function to filter products by color. NOTE: will need to consider the value of brand for multiple filter combination functionality
   filterProductsColor = (event) => {
     if(event.target.value === ""){
+      //if color and brand is "All"
       if(this.state.brand === ""){
+        //restore sorted order
         const tempItems = data
         tempItems.sort((a,b) => (
           this.state.sort === "highest"?
@@ -149,6 +154,7 @@ class App extends Component {
         ))
         this.setState({color: event.target.value, items: tempItems})
       }else{
+        //restore sorted order
         const tempItems = data.filter(item => item.brand === this.state.brand)
         tempItems.sort((a,b) => (
           this.state.sort === "highest"?
@@ -160,6 +166,7 @@ class App extends Component {
         this.setState({color: event.target.value, items: tempItems})
       }
     }else{
+      //if color is NOT "All" but brand is "All"
       if(this.state.brand === ""){
         const tempItems = data.filter(item => item.color === event.target.value)
         tempItems.sort((a,b) => (
@@ -175,6 +182,7 @@ class App extends Component {
     
         })
       }else{
+        //if neither color nor brand is "All"
         const tempItems = data.filter(item => (item.color === event.target.value && item.brand === this.state.brand))
         tempItems.sort((a,b) => (
           this.state.sort === "highest"?
@@ -191,6 +199,8 @@ class App extends Component {
     } 
   }
 
+  //function to filter products by brand. NOTE: will need to consider the value of color for multiple filter combination functionality.
+  //same functionality as color.
   filterProductsBrand = (event) => {
     if(event.target.value === ""){
       if(this.state.color === ""){
@@ -246,22 +256,28 @@ class App extends Component {
       }
     }
   }
+
 //referenced: https://dmitripavlutin.com/foreach-iterate-array-javascript/
+//function to add products to cart.
   addToCart = (product) => {
-    let inCart = false
+    let inCart = false //flag to determine if product is in cart
     const cartItems = this.state.cart.slice();
     cartItems.forEach(item => {
+      //increase count for product in cart instead of adding a duplicate
       if(item.id === product.id){
         item.count++
         inCart = true
       }
     })
+
+    //add new product if product is not in cart.
     if(!inCart){
       cartItems.push({...product, count: 1})
     }
     this.setState({cart: cartItems})
   }
 
+  //funtion to remove product from cart
   removeFromCart = (product) => {
     const cartItems = this.state.cart.slice();
     this.setState({cart: cartItems.filter(item => item.id !== product.id)})
@@ -273,6 +289,8 @@ class App extends Component {
 
         <h1 style={{textAlign: "center", color: "white", fontFamily:"sans-serif"}}>CS1300 Top Shop</h1>
         <div style={{ padding:20, width:"54%"}}>
+
+          {/* filter section */}
         <Filter
 sort={this.state.sort}
 color={this.state.color}
@@ -282,6 +300,8 @@ filterProductsBrand={this.filterProductsBrand}
 sortProducts={this.sortProducts}
 />
         </div>
+
+        {/* place product cards and shopping cart side by side */}
 <div style={{padding: 20}}>
   <div style={{width:"70%", float:"left"}}>
   <DisplayList addToCart={this.addToCart} items={this.state.items}></DisplayList>
