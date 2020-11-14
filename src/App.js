@@ -288,7 +288,7 @@ class App extends Component {
       <div>
 
         <h1>CS1300 Top Shop</h1>
-        <div style={{ padding:20, width:"54%"}}>
+        <div clasName="filter-div">
 
           {/* filter section */}
         <Filter
@@ -302,11 +302,11 @@ sortProducts={this.sortProducts}
         </div>
 
         {/* place product cards and shopping cart side by side */}
-<div style={{padding: 20}}>
-  <div style={{width:"70%", float:"left"}}>
+<div className="card-div">
+  <div className="cards-div">
   <DisplayList addToCart={this.addToCart} items={this.state.items}></DisplayList>
   </div>
-<div style={{width:"30%", float:"left"}}>
+<div className="cart-div" style={{width:"30%", float:"left"}}>
 <Cart removeFromCart={this.removeFromCart} cartItems={this.state.cart}></Cart>
 </div>
 </div>

@@ -23,6 +23,25 @@ h1 {
     font-family: sans-serif;
 }
 
+.filter-div {
+    padding: 20px;
+    width: 54%;
+}
+
+.card-div {
+    padding: 20px;
+}
+
+.cards-div {
+    width: 70%;
+    float: left;
+}
+
+.cart-div {
+    width: 30%;
+    float: left;
+}
+
 .cart-item {
     background-color: #003b46;
     padding: 5px;
