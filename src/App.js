@@ -287,7 +287,7 @@ class App extends Component {
     return (
       <div>
 
-        <h1 style={{textAlign: "center", color: "white", fontFamily:"sans-serif"}}>CS1300 Top Shop</h1>
+        <h1>CS1300 Top Shop</h1>
         <div style={{ padding:20, width:"54%"}}>
 
           {/* filter section */}
