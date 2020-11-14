@@ -28,6 +28,7 @@ class Cart extends Component {
                 {listItems}
                 </div>
 
+                {/* referenced: https://dev.to/yogesnsamy/how-to-use-the-reduce-method-in-javascript-and-react-5dhl */}
                 {cartItems.length !==0 && (
                     <div style={{display:"flex", justifyContent: "space-around", width: "100%", alignItems: "center", paddingBottom: 10}}>
                         <div style={{fontFamily:"sans-serif"}}>

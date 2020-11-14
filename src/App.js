@@ -116,7 +116,7 @@ class App extends Component {
     }
   }
 
-  //modify this
+ //sortProducts referenced: https://www.codegrepper.com/code-examples/typescript/sort+array+of+objects+in+react+js 
   sortProducts = (event) => {
 
     console.log(this.state.items.map(item => item.key))
@@ -246,17 +246,17 @@ class App extends Component {
       }
     }
   }
-
+//referenced: https://dmitripavlutin.com/foreach-iterate-array-javascript/
   addToCart = (product) => {
+    let inCart = false
     const cartItems = this.state.cart.slice();
-    let alreadyInCart = false
     cartItems.forEach(item => {
       if(item.id === product.id){
         item.count++
-        alreadyInCart = true
+        inCart = true
       }
     })
-    if(!alreadyInCart){
+    if(!inCart){
       cartItems.push({...product, count: 1})
     }
     this.setState({cart: cartItems})
