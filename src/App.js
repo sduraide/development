@@ -156,102 +156,21 @@ class App extends Component {
     }));
   };
 
-  //function to filter products by color. NOTE: will need to consider the value of brand for multiple filter combination functionality
   filterProductsColor = (event) => {
-    if (event.target.value === "All") {
-      //if color and brand is "All"
-      if (this.state.brand === "All") {
-        //restore sorted order
-        const tempItems = data;
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
-            ? 1
-            : -1
-        );
-        this.setState({ color: event.target.value, items: tempItems });
-      } else {
-        //restore sorted order
-        const tempItems = data.filter(
-          (item) => item.brand === this.state.brand
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
-            ? 1
-            : -1
-        );
-        this.setState({ color: event.target.value, items: tempItems });
-      }
-    } else {
-      //if color is NOT "All" but brand is "All"
-      if (this.state.brand === "All") {
-        const tempItems = data.filter(
-          (item) => item.color === event.target.value
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
-            ? 1
-            : -1
-        );
-        this.setState({
-          color: event.target.value,
-          items: tempItems,
-        });
-      } else {
-        //if neither color nor brand is "All"
-        const tempItems = data.filter(
-          (item) =>
-            item.color === event.target.value && item.brand === this.state.brand
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
-            ? 1
-            : -1
-        );
-        this.setState({
-          color: event.target.value,
-          items: tempItems,
-        });
-      }
-    }
-  };
+    this.setState({color: event.target.value}, () => {
+      this.filter()
+    })
+  }
 
-  //function to filter products by brand. NOTE: will need to consider the value of color for multiple filter combination functionality.
   filterProductsBrand = (event) => {
-    if (event.target.value === "All") {
-      if (this.state.color === "All") {
-        const tempItems = data;
+    this.setState({brand: event.target.value}, () => {
+    this.filter()
+    })
+  }
+
+  filter = () => {
+    if(this.state.brand === "All" && this.state.color === "All"){
+      const tempItems = data;
         tempItems.sort((a, b) =>
           this.state.sort === "highest"
             ? a.price < b.price
@@ -265,73 +184,67 @@ class App extends Component {
             ? 1
             : -1
         );
-        this.setState({ brand: event.target.value, items: tempItems });
-      } else {
-        const tempItems = data.filter(
-          (item) => item.color === this.state.color
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
+        this.setState({ items: tempItems });
+    } else if(this.state.brand !== "All" && this.state.color === "All") {
+      const tempItems = data.filter(
+        (item) => item.brand === this.state.brand
+      );
+      tempItems.sort((a, b) =>
+        this.state.sort === "highest"
+          ? a.price < b.price
             ? 1
             : -1
-        );
-        this.setState({ brand: event.target.value, items: tempItems });
-      }
-    } else {
-      if (this.state.color === "All") {
-        const tempItems = data.filter(
-          (item) => item.brand === event.target.value
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
+          : this.state.sort === "lowest"
+          ? a.price > b.price
             ? 1
             : -1
-        );
-        this.setState({
-          brand: event.target.value,
-          items: tempItems,
-        });
-      } else {
-        const tempItems = data.filter(
-          (item) =>
-            item.brand === event.target.value && item.color === this.state.color
-        );
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
+          : a.id > b.id
+          ? 1
+          : -1
+      );
+      this.setState({ items: tempItems });
+    } else if(this.state.brand === "All" && this.state.color !== "All") {
+      const tempItems = data.filter(
+        (item) => item.color === this.state.color
+      );
+      tempItems.sort((a, b) =>
+        this.state.sort === "highest"
+          ? a.price < b.price
             ? 1
             : -1
-        );
-        this.setState({
-          brand: event.target.value,
-          items: tempItems,
-        });
-      }
+          : this.state.sort === "lowest"
+          ? a.price > b.price
+            ? 1
+            : -1
+          : a.id > b.id
+          ? 1
+          : -1
+      );
+      this.setState({ items: tempItems });
     }
-  };
+    else{
+      const tempItems = data.filter(
+        (item) =>
+          item.brand === this.state.brand && item.color === this.state.color
+      );
+      tempItems.sort((a, b) =>
+        this.state.sort === "highest"
+          ? a.price < b.price
+            ? 1
+            : -1
+          : this.state.sort === "lowest"
+          ? a.price > b.price
+            ? 1
+            : -1
+          : a.id > b.id
+          ? 1
+          : -1
+      );
+      this.setState({
+        items: tempItems,
+      });
+    }
+  }
 
   //referenced: https://dmitripavlutin.com/foreach-iterate-array-javascript/
   //function to add products to cart.
