@@ -57,7 +57,7 @@ class DisplayList extends Component {
           )}
         </div>
 
-        <button className="add-to-cart">Add to Cart</button>
+        <button className="add-to-cart" onClick={() => this.props.addToCart(item)}>Add to Cart</button>
       </div>
     );
   };
