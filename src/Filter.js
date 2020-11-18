@@ -24,7 +24,7 @@ class Filter extends Component {
             value={this.props.color}
             onChange={this.props.filterProductsColor}
           >
-            <option value="">All</option>
+            <option value="All">All</option>
             <option value="Black">Black</option>
             <option value="Brown">Brown</option>
             <option value="Pink">Pink</option>
@@ -38,7 +38,7 @@ class Filter extends Component {
             value={this.props.brand}
             onChange={this.props.filterProductsBrand}
           >
-            <option value="">All</option>
+            <option value="All">All</option>
             <option value="Zara">Zara</option>
             <option value="H&M">H&M</option>
             <option value="Adika">Adika</option>

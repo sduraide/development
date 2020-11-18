@@ -122,11 +122,13 @@ const data = [
 class App extends Component {
   constructor() {
     super();
+
+    //state contains the product cards, selected sort and filters, and cart items. Default value is All for filter
     this.state = {
       items: data,
       sort: "",
-      color: "",
-      brand: "",
+      color: "All",
+      brand: "All",
       cart: [],
     };
   }
@@ -156,9 +158,9 @@ class App extends Component {
 
   //function to filter products by color. NOTE: will need to consider the value of brand for multiple filter combination functionality
   filterProductsColor = (event) => {
-    if (event.target.value === "") {
+    if (event.target.value === "All") {
       //if color and brand is "All"
-      if (this.state.brand === "") {
+      if (this.state.brand === "All") {
         //restore sorted order
         const tempItems = data;
         tempItems.sort((a, b) =>
@@ -197,7 +199,7 @@ class App extends Component {
       }
     } else {
       //if color is NOT "All" but brand is "All"
-      if (this.state.brand === "") {
+      if (this.state.brand === "All") {
         const tempItems = data.filter(
           (item) => item.color === event.target.value
         );
@@ -246,10 +248,9 @@ class App extends Component {
   };
 
   //function to filter products by brand. NOTE: will need to consider the value of color for multiple filter combination functionality.
-  //same functionality as color.
   filterProductsBrand = (event) => {
-    if (event.target.value === "") {
-      if (this.state.color === "") {
+    if (event.target.value === "All") {
+      if (this.state.color === "All") {
         const tempItems = data;
         tempItems.sort((a, b) =>
           this.state.sort === "highest"
@@ -285,7 +286,7 @@ class App extends Component {
         this.setState({ brand: event.target.value, items: tempItems });
       }
     } else {
-      if (this.state.color === "") {
+      if (this.state.color === "All") {
         const tempItems = data.filter(
           (item) => item.brand === event.target.value
         );
