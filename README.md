@@ -1,7 +1,5 @@
 # README
 
-- - - -
-
 This app is a shopping website where users can browse through tops, by filtering through brands and colors, and sorting according to price. They can also add to cart.
 
 ### Organization of components
