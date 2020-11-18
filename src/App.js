@@ -137,114 +137,69 @@ class App extends Component {
 
   //function to sort products by price. Takes in an event which tells the value user selected from dropdown.
   sortProducts = (event) => {
-    this.setState((state) => ({
-      sort: event.target.value,
-      items: this.state.items.slice().sort((a, b) =>
-        event.target.value === "highest"
-          ? a.price < b.price
-            ? 1
-            : -1
-          : event.target.value === "lowest"
-          ? a.price > b.price
-            ? 1
-            : -1
-          : //if option chosen is "Select" then sort by id of item
-          a.id > b.id
-          ? 1
-          : -1
-      ),
-    }));
+    this.setState({ sort: event.target.value }, () => {
+      this.sortHelper(this.state.items);
+    });
   };
 
+  //function that sort the list that tit takes in as a parameter and updates the state of items
+  sortHelper = (temp) => {
+    const tempItems = temp.slice().sort((a, b) =>
+      this.state.sort === "highest"
+        ? a.price < b.price
+          ? 1
+          : -1
+        : this.state.sort === "lowest"
+        ? a.price > b.price
+          ? 1
+          : -1
+        : //if option chosen is "Select" then sort by id of item
+        a.id > b.id
+        ? 1
+        : -1
+    );
+    this.setState({ items: tempItems });
+  };
+
+  //function to filter products by color
   filterProductsColor = (event) => {
-    this.setState({color: event.target.value}, () => {
-      this.filter()
-    })
-  }
+    this.setState({ color: event.target.value }, () => {
+      this.filter();
+    });
+  };
 
+  //function to filter products by brand
   filterProductsBrand = (event) => {
-    this.setState({brand: event.target.value}, () => {
-    this.filter()
-    })
-  }
+    this.setState({ brand: event.target.value }, () => {
+      this.filter();
+    });
+  };
 
+  //filter function for double parameters and retain the sort
   filter = () => {
-    if(this.state.brand === "All" && this.state.color === "All"){
-      const tempItems = data;
-        tempItems.sort((a, b) =>
-          this.state.sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : this.state.sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : a.id > b.id
-            ? 1
-            : -1
-        );
-        this.setState({ items: tempItems });
-    } else if(this.state.brand !== "All" && this.state.color === "All") {
-      const tempItems = data.filter(
-        (item) => item.brand === this.state.brand
-      );
-      tempItems.sort((a, b) =>
-        this.state.sort === "highest"
-          ? a.price < b.price
-            ? 1
-            : -1
-          : this.state.sort === "lowest"
-          ? a.price > b.price
-            ? 1
-            : -1
-          : a.id > b.id
-          ? 1
-          : -1
-      );
-      this.setState({ items: tempItems });
-    } else if(this.state.brand === "All" && this.state.color !== "All") {
-      const tempItems = data.filter(
-        (item) => item.color === this.state.color
-      );
-      tempItems.sort((a, b) =>
-        this.state.sort === "highest"
-          ? a.price < b.price
-            ? 1
-            : -1
-          : this.state.sort === "lowest"
-          ? a.price > b.price
-            ? 1
-            : -1
-          : a.id > b.id
-          ? 1
-          : -1
-      );
-      this.setState({ items: tempItems });
-    }
-    else{
+    //if color and brand is "All"
+    if (this.state.brand === "All" && this.state.color === "All") {
+      this.sortHelper(data);
+    } 
+    //if color is "All" and brand is not "All"
+    else if (this.state.brand !== "All" && this.state.color === "All") {
+      const tempItems = data.filter((item) => item.brand === this.state.brand);
+      this.sortHelper(tempItems);
+    } 
+    //if color is not "All" and brand is "All"
+    else if (this.state.brand === "All" && this.state.color !== "All") {
+      const tempItems = data.filter((item) => item.color === this.state.color);
+      this.sortHelper(tempItems);
+    } 
+    //if neither is "All"
+    else {
       const tempItems = data.filter(
         (item) =>
           item.brand === this.state.brand && item.color === this.state.color
       );
-      tempItems.sort((a, b) =>
-        this.state.sort === "highest"
-          ? a.price < b.price
-            ? 1
-            : -1
-          : this.state.sort === "lowest"
-          ? a.price > b.price
-            ? 1
-            : -1
-          : a.id > b.id
-          ? 1
-          : -1
-      );
-      this.setState({
-        items: tempItems,
-      });
+      this.sortHelper(tempItems);
     }
-  }
+  };
 
   //referenced: https://dmitripavlutin.com/foreach-iterate-array-javascript/
   //function to add products to cart.
