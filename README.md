@@ -21,4 +21,4 @@ The Cart component takes in the product items in the cart from App.js state. Sin
 App.js state consists of the product cards, selected sort and filters, and cart items. When the user changes the filter by brand or color option, or sort by price option from the dropdown, it triggers changes in App.js. W.r.t to the product cards, adding items to cart and removing items from cart also triggers state change as the cart items change.
 
 ### Deployment
-Acces this website [https://floating-journey-81523.herokuapp.com/](here)
+Acces this website [here](https://floating-journey-81523.herokuapp.com/)
