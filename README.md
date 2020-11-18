@@ -20,5 +20,7 @@ The Cart component takes in the product items in the cart from App.js state. Sin
 ### How the user trigger state changes
 App.js state consists of the product cards, selected sort and filters, and cart items. When the user changes the filter by brand or color option, or sort by price option from the dropdown, it triggers changes in App.js. W.r.t to the product cards, adding items to cart and removing items from cart also triggers state change as the cart items change.
 
+Filter products functions could be made effective. I've tried to pass in a string to filter options to determine if it's a color or brand to synthesize the functions into one to avoid redundancy. However, there were a couple edge cases which ended up needing two separate functions anyway. 
+
 ### Deployment
 Acces this website [here](https://floating-journey-81523.herokuapp.com/)
