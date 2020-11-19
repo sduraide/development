@@ -14,8 +14,8 @@ class DisplayList extends Component {
         <img
           className="product-image"
           src={item.url}
-          width={300}
-          height={300}
+          width={"200vw"}
+          height={"200vw"}
           mode="fit"
           alt="Top"
         />
@@ -25,13 +25,13 @@ class DisplayList extends Component {
         {/* display logo of brand */}
         <div>
           {item.brand === "Zara" && (
-            <img className="logo" src={zara} width={64} height={32} alt="brand"></img>
+            <img className="logo" src={zara} width={"60vw"} height={"30vw"} alt="brand"></img>
           )}
           {item.brand === "H&M" && (
-            <img className="logo" src={hm} width={78} height={32} alt="brand"></img>
+            <img className="logo" src={hm} width={"60vw"} height={"30vw"} alt="brand"></img>
           )}
           {item.brand === "Adika" && (
-            <img className="logo" src={adika} width={64} height={32} alt="brand"></img>
+            <img className="logo" src={adika} width={"60vw"} height={"30vw"} alt="brand"></img>
           )}
         </div>
 
