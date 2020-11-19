@@ -6,7 +6,8 @@ body {
     display: flex;
     padding: 1px;
     margin: 20px;
-    margin-left: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
     justify-content: center;
     border: 3px dotted #c4dfe6;
 }
@@ -15,6 +16,7 @@ body {
     margin: 10px;
     color: white;
     font-family: sans-serif;
+    font-size: 1.5rem;
 }
 
 h1 {
@@ -24,7 +26,7 @@ h1 {
 }
 
 .filter-div {
-    padding: 20px;
+    padding: 40px;
     width: 54%;
 }
 
