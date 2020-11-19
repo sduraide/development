@@ -14,8 +14,8 @@ class DisplayList extends Component {
         <img
           className="product-image"
           src={item.url}
-          width={"200vw"}
-          height={"200vw"}
+          width={"100vw"}
+          height={"300vw"}
           mode="fit"
           alt="Top"
         />
