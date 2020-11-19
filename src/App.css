@@ -131,7 +131,7 @@ h1 {
     padding-left: 10px;
     padding-right: 10px;
     margin: 15px;
-    width: 20vw;
+    width: 18vw;
     border-radius: 25px;
 }
 
@@ -139,7 +139,7 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 80%;
     max-width: 400px;
 }
 
